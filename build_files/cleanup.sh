@@ -16,7 +16,7 @@ rm /etc/skel/.config/autostart/steam.desktop
 dnf5 clean all
 
 # Clean temporary files
-rm -rf /tmp/*
+# rm -rf /tmp/*
 
 # Clean /var directory while preserving essential files
 find /var/* -maxdepth 0 -type d \! -name cache -exec rm -fr {} \;

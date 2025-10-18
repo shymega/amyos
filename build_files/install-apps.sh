@@ -26,7 +26,6 @@ rm -rf /var/lib/pcp
 ## Just in case, according to https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html#installation
 echo 'zfs' > /etc/dnf/protected.d/zfs.conf
 
-
 # Workaround to allow installing nix with composefs
 mkdir /nix
 
