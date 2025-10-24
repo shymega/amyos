@@ -4,7 +4,7 @@ COPY build_files /
 # ZFS kernel and module
 FROM ghcr.io/ublue-os/akmods-zfs:coreos-testing-42 AS zfs-cache
 
-FROM ghcr.io/ublue-os/bazzite:42@sha256:43b0a405fb12476ed3486cfe9f005b412bceea00fad9978e9f95496e30677ec8 as amyos
+FROM ghcr.io/ublue-os/bazzite:42 as amyos
 COPY system_files /
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \

@@ -34,39 +34,19 @@ declare -A RPM_PACKAGES=(
   ["fedora"]="\
     android-tools \
     aria2 \
-    bchunk \
-    bleachbit \
-    fuse-btfs \
-    fuse-devel \
-    fuse3-devel \
     fzf \
-    gnome-disk-utility \
     gparted \
-    gwenview \
-    hashcat \
-    isoimagewriter \
-    kcalc \
-    kgpg \
-    ksystemlog \
-    llama-cpp \
     neovim \
-    nmap \
     ollama \
-    openrgb \
     printer-driver-brlaser \
     qemu-kvm \
-    thefuck \
     util-linux \
-    virt-manager \
-    virt-viewer \
-    wireshark \
     yakuake \
     yt-dlp \
     zsh-autosuggestions \
     zsh"
 
   ["terra"]="\
-    coolercontrol \
     ghostty \
     hack-nerd-fonts \
     starship \
@@ -74,21 +54,8 @@ declare -A RPM_PACKAGES=(
     ubuntumono-nerd-fonts \
     ubuntusans-nerd-fonts"
 
-  ["rpmfusion-free,rpmfusion-free-updates,rpmfusion-nonfree,rpmfusion-nonfree-updates"]="\
-    audacious \
-    audacious-plugins-freeworld \
-    audacity-freeworld"
-
   ["fedora-multimedia"]="\
-    HandBrake-cli \
-    HandBrake-gui \
-    haruna \
-    mpv \
-    vlc-plugin-bittorrent \
-    vlc-plugin-ffmpeg \
-    vlc-plugin-kde \
-    vlc-plugin-pause-click \
-    vlc"
+    mpv"
 
   ["docker-ce"]="\
     containerd.io \
@@ -97,9 +64,7 @@ declare -A RPM_PACKAGES=(
     docker-ce-cli \
     docker-compose-plugin"
 
-  ["brave-browser"]="brave-browser"
   ["cloudflare-warp"]="cloudflare-warp"
-  ["vscode"]="code"
 )
 
 log "Starting Amy OS build process"
@@ -126,13 +91,6 @@ done
 
 log "Enabling system services"
 systemctl enable docker.socket libvirtd.service
-
-log "Installing Cursor CLI"
-CLI_DIR="/tmp/cursor-cli"
-mkdir -p "$CLI_DIR"
-aria2c --dir="$CLI_DIR" --out="cursor-cli.tar.gz" --max-tries=3 --connect-timeout=30 "https://api2.cursor.sh/updates/download-latest?os=cli-alpine-x64"
-tar -xzf "$CLI_DIR/cursor-cli.tar.gz" -C "$CLI_DIR"
-install -m 0755 "$CLI_DIR/cursor" /usr/bin/cursor-cli
 
 log "Adding Amy OS just recipes"
 echo "import \"/usr/share/amyos/just/amy.just\"" >>/usr/share/ublue-os/justfile
