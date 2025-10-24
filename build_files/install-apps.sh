@@ -104,4 +104,18 @@ for recipe in "install-coolercontrol" "install-openrgb"; do
   sed -i "s/^$recipe:/_$recipe:/" /usr/share/ublue-os/just/*.just
 done
 
+# Setup Zerotier
+
+sudo tee >/dev/null /etc/yum.repos.d/zerotier.repo <<'EOF'
+[zerotier]
+name=ZeroTier, Inc. RPM Release Repository
+baseurl=https://download.zerotier.com/redhat/fc/$releasever
+enabled=1
+gpgcheck=1
+gpgkey=https://download.zerotier.com/contact@zerotier.com.gpg
+EOF
+
+dnf5 install -y zerotier-one
+systemctl enable zerotier-one
+
 log "Build process completed"
