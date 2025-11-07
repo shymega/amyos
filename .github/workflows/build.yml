@@ -30,6 +30,9 @@ jobs:
   build_push:
     name: Build and push image
     runs-on: ubuntu-24.04
+    container:
+      image: "ghcr.io/ublue-os/devcontainer:latest-x86_64@sha256:a91a9d33c3271ad55570c19e2b524fcf0006ec028dd68f730130e43c427db5ab"
+      options: "--privileged --volume /var/lib/containers:/var/lib/containers --security-opt seccomp=unconfined --security-opt label=disable --user 0:0"
 
     permissions:
       contents: read
@@ -53,8 +56,8 @@ jobs:
       #   with:
       #     remove-codeql: true
 
-      - name: Mount BTRFS for podman storage
-        uses: ublue-os/container-storage-action@main
+      # - name: Mount BTRFS for podman storage
+       #  uses: ublue-os/container-storage-action@main
 
       - name: Get current date
         id: date
