@@ -106,7 +106,7 @@ done
 
 # Setup Zerotier
 
-sudo tee >/dev/null /etc/yum.repos.d/zerotier.repo <<'EOF'
+tee >/dev/null /etc/yum.repos.d/zerotier.repo <<'EOF'
 [zerotier]
 name=ZeroTier, Inc. RPM Release Repository
 baseurl=https://download.zerotier.com/redhat/fc/$releasever
