@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+# Amy OS Auto-login Setup Script
+
+set -euo pipefail
+
+# Get the first non-root user (typically user ID >= 1000)
+USER=$(getent passwd | awk -F: '$3 >= 1000 && $3 < 65534 { print $1; exit }')
+
+if [[ -z "${USER}" ]]; then
+    echo "No suitable user found for auto-login"
+    exit 1
+fi
+
+echo "Setting up auto-login for user: ${USER}"
+
+# Replace %USER% placeholder in SDDM config
+sed -i "s/%USER%/${USER}/g" /etc/sddm.conf.d/00-amyos-autologin.conf
+
+# Enable SDDM service if not already enabled
+systemctl enable sddm.service
+
+echo "Auto-login configured for ${USER} to boot into Gamescope"

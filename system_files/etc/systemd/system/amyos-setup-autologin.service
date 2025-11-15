@@ -1,0 +1,14 @@
+[Unit]
+Description=Amy OS Auto-login Setup
+After=multi-user.target
+ConditionPathExists=/etc/sddm.conf.d/00-amyos-autologin.conf
+ConditionFileNotEmpty=!/etc/sddm.conf.d/.amyos-autologin-configured
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/amyos-setup-autologin
+ExecStartPost=/usr/bin/touch /etc/sddm.conf.d/.amyos-autologin-configured
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

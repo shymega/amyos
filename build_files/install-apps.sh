@@ -118,4 +118,7 @@ EOF
 dnf5 install -y zerotier-one
 systemctl enable zerotier-one
 
+# Enable Amy OS auto-login setup service
+systemctl enable amyos-setup-autologin.service
+
 log "Build process completed"
