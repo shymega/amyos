@@ -11,9 +11,6 @@ log() {
 
 RELEASE="$(rpm -E %fedora)"
 
-# as per https://openzfs.github.io/openzfs-docs/Getting%20Started/Fedora/index.html
-# "zfs-fuse is unmaintained and should not be used under any circumstance"
-rpm -e --nodeps zfs-fuse
 dnf install -y https://zfsonlinux.org/fedora/zfs-release-2-8$(rpm --eval "%{dist}").noarch.rpm
 dnf install -y kernel-devel-"$(rpm -qa kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 dnf install -y zfs
